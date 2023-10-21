@@ -314,6 +314,9 @@ class Model():
     
         # Saves the sound to a file called test.wav in the current directory
         new_path = ""
+        if not os.path.exists("audio/wavs"):
+            os.makedirs("audio/wavs")
+        
         i = 0
         while os.path.exists("audio/wavs/test%s.wav" % i):
             i += 1
@@ -364,7 +367,10 @@ class Model():
         for i in tracks[1:]:
             audio_track+=i
         #track = tracks[0] + tracks[1]
-        file_handle = audio_track.export("audio/clip.wav", format="wav")
+        i = 0
+        while os.path.exists("audio/clip%s.wav" % i):
+            i += 1
+        file_handle = audio_track.export("audio/clip{}.wav".format(i), format="wav")
         #winsound.PlaySound(path, winsound.SND_NOSTOP)
         if file_handle is not None:
             return file_handle
