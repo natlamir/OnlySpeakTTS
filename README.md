@@ -1,3 +1,39 @@
+# Windows Install
+1. Create and activate new conda environment.
+```
+conda create --name OnlySpeakTTS python=3.9 -y && conda activate OnlySpeakTTS
+```
+
+2. Install pytorch.
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia -y
+```
+
+3. Clone the repository and cd into the new folder
+```
+git clone https://github.com/natlamir/OnlySpeakTTS.git && cd OnlySpeakTTS
+```
+
+4. Install Dependencies
+```
+pip install -r requirements.txt
+```
+
+5. Create a folder within `Tortoise/tortoise` called `voices` and create a new folder for any voice you want to use. Should contain a few audio clips of about 10 seconds length. See the [Tortoise TTS](https://github.com/natlamir/tortoise-WebUI) install for folders you can copy over.
+
+# Usage
+1. Launch 2 anaconda prompts. Activate the OnlySpeakTTS conda environmnt and cd to the folder where OnlySpeakTTS is installed in both.
+(Alternatively: edit the `run.bat` and edit the `CondaPath`, `EnvName`, and `OnlySpeakTTSPath` variable values for your environment. Save, exit. Then you should be able to double click `run.bat` to launch both anaconda prompts with the environment activated, one with the server, and the other with the client.)
+2. Wait until the server has finished starting up in the server anaconda prompt. It should say "Serving flask app, debug mode off, etc".
+3. In the client anaconda prompt, it should say `M:`, for your first run, create a new voice by entering `<NEW VOICE>` and hit enter to issue the new voice command to the server. The server should begin processing and should say DONE! once complete.
+4. Now the client should prompt you for more details, follow the prompt and enter the values you want to use. Once everything is entered, the client will send the data to the server, and it should generate the voice.
+5. Then the client should say "M:" where you can enter a message you want to speak. Enter a prompt.
+6. Next, the client will ask for the voice name. Enter the voice name you created.
+7. The server should then generate the audio. If you want to generate another random voice with those settings, enter `<REDO>`. Once you are satisfied with a voice, enter `<SAVE VOICE>` and it will save that voice so it can be used next time you launch the app.
+8. The output audio will be stored in a folder called `audio`
+
+Original ReadMe:
+
 # OnlySpeakTTS
  
 This is a TTS server that uses a private fork of tortoise to keep generation times and VRAM usage low.
